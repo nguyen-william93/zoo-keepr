@@ -1,8 +1,9 @@
 const express = require('express');
+const PORT = process.env.PORT || 3001;
 const app = express();
 const { animals } = require('./data/animals');
 
-app.listen(3001, () => {
+app.listen(PORT, () => {
     console.log("server is live on port 3001!");
 });
 

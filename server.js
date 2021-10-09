@@ -4,7 +4,7 @@ const app = express();
 const { animals } = require('./data/animals');
 
 app.listen(PORT, () => {
-    console.log("server is live on port 3001!");
+    console.log(`API server is now on ${PORT}`);
 });
 
 app.get('/api/animals', (req, res) => {

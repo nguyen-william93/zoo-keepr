@@ -56,5 +56,5 @@ function filterByQuery (query, animalsArr){
         filteredResults = filteredResults.filter(animal => animal.name === query.name);
     }
     return filteredResults;
-}
+};
 

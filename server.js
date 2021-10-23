@@ -4,13 +4,11 @@ const app = express();
 const { animals } = require('./data/animals');
 const fs = require('fs');
 const path = require('path');
+const { allowedNodeEnvironmentFlags } = require('process');
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
-
-app.listen(PORT, () => {
-    console.log(`API server is now on ${PORT}`);
-});
+app.use(express.static('public'));
 
 app.get('/api/animals', (req, res) => {
     let results = animals;
@@ -102,3 +100,23 @@ function validateAnimal(animal){
 
 
 }
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get("/animals", (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get("/zookeepers", (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`API server is now on ${PORT}`);
+});

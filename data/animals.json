@@ -13,7 +13,7 @@
     },
     {
       "id": "1",
-      "name": "Terry",
+      "name": "NANA <3",
       "species": "gorilla",
       "diet": "omnivore",
       "personalityTraits": [
@@ -108,6 +108,33 @@
         "loving"
       ],
       "id": "10"
+    },
+    {
+      "name": "larry",
+      "species": "lemur",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "11"
+    },
+    {
+      "name": "larry",
+      "species": "lemur",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "12"
+    },
+    {
+      "name": "larry",
+      "species": "lemur",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "13"
     }
   ]
 }

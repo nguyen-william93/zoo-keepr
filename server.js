@@ -2,6 +2,11 @@ const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();
 const { animals } = require('./data/animals');
+const fs = require('fs');
+const path = require('path');
+
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
 
 app.listen(PORT, () => {
     console.log(`API server is now on ${PORT}`);
@@ -16,7 +21,7 @@ app.get('/api/animals', (req, res) => {
 });
 
 app.get('/api/animals/:id', (req, res) => {
-    const result = findById(req.params.id, animals);
+    const result = findById(req.params.id, animal);
     if (result){
         res.json(result);
     } else {
@@ -24,10 +29,32 @@ app.get('/api/animals/:id', (req, res) => {
     }
 });
 
+app.post('/api/animals', (req, res) => {
+    req.body.id = animals.length.toString();
+
+    if (!validateAnimal(req.body)) {
+        res.status(400).send('The animal is not properly formatted.');
+    } else {
+        const animal = createNewAnimal(req.body, animals);
+
+        res.json(animal);
+    }
+})
+
 function findById (id, animalsArr){
     const result = animalsArr.filter(animal => animal.id === id)[0];
     return result;
 };
+
+function createNewAnimal(body, animalsArray){
+    const animal = body;
+    animalsArray.push(animal);
+    fs.writeFileSync(
+        path.join(__dirname, './data/animals.json'),
+        JSON.stringify ({ animals: animalsArray }, null, 2)
+    );
+    return animal;
+}
 
 function filterByQuery (query, animalsArr){
     let personalityTraitArr = [];
@@ -58,3 +85,20 @@ function filterByQuery (query, animalsArr){
     return filteredResults;
 };
 
+function validateAnimal(animal){
+    if (!animal.name || typeof animal.name !== 'string') {
+        return false;
+    }
+    if (!animal.species || typeof animal.species !== 'string'){
+        return false;
+    }
+    if (!animal.diet || typeof animal.diet !== 'string'){
+        return false;
+    }
+    if (!animal.personalityTraits || !Array.isArray(animal.personalityTraits)) {
+        return false;
+    }
+    return true;
+
+
+}

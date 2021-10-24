@@ -144,6 +144,23 @@
         "hungry"
       ],
       "id": "14"
+    },
+    {
+      "name": "Darlene",
+      "id": "12345"
+    },
+    {
+      "name": "Darlene",
+      "id": "12345"
+    },
+    {
+      "name": "nana",
+      "species": "monkey",
+      "diet": "carnivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "17"
     }
   ]
 }
